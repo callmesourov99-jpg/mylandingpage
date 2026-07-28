@@ -592,48 +592,58 @@
   }
 
   // Google Sheet Submission Logic
-  var scriptURL = 'https://script.google.com/macros/s/AKfycbyotmpIn7VUkT_j5QXYAUoSR5HmAHerZzK0A1jfWVqmOmYwzLdjdpzCbtpmGgQWwNSZ/exec'; 
-  var form = document.getElementById('checkout-form');
-  var submitBtn = form.querySelector('.btn-submit');
+ var scriptURL = 'https://script.google.com/macros/s/AKfycbyotmpIn7VUkT_j5QXYAUoSR5HmAHerZzK0A1jfWVqmOmYwzLdjdpzCbtpmGgQWwNSZ/exec'; 
+    var form = document.getElementById('checkout-form');
+    var submitBtn = form.querySelector('.btn-submit');
 
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
+    // প্রোডাক্টের একক দাম (টাকা)
+    var unitPrice = 1990; 
 
-    var formData = {
-      Name: form.Name.value,
-      Phone: form.Phone.value,
-      Address: form.Address.value,
-      Product: form.Product.value,
-      Quantity: form.Quantity.value
-    };
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
 
-    fetch(scriptURL, { 
-      method: 'POST',
-      mode: 'no-cors',
-      headers: {
-        'Content-Type': 'text/plain;charset=utf-8',
-      },
-      body: JSON.stringify(formData)
-    })
-    .then(function() {
-      alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
-      form.reset();
-      document.getElementById('quantity').value = 1;
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> অর্ডার নিশ্চিত করুন';
-    })
-    .catch(function(error) {
-      alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
-      form.reset();
-      document.getElementById('quantity').value = 1;
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> অর্ডার নিশ্চিত করুন';
+      var qty = parseInt(form.Quantity.value) || 1;
+      var totalPrice = (unitPrice * qty) + " BDT"; // মোট দাম হিসাব করা
+
+      // প্রোডাক্টের নাম + ভ্যারিয়েন্ট একত্র করা
+      var fullProductName = "Wireless Headphones - " + form.Product.value;
+
+      var formData = {
+        Name: form.Name.value,
+        Phone: form.Phone.value,
+        Address: form.Address.value,
+        Product: fullProductName,
+        Price: totalPrice,
+        Quantity: qty
+      };
+
+      fetch(scriptURL, { 
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(function() {
+        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
+        form.reset();
+        document.getElementById('quantity').value = 1;
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> অর্ডার নিশ্চিত করুন';
+      })
+      .catch(function(error) {
+        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
+        form.reset();
+        document.getElementById('quantity').value = 1;
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> অর্ডার নিশ্চিত করুন';
+      });
     });
-  });
-</script>
+  </script>
 
 </body>
 </html>
