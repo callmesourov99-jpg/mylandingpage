@@ -547,94 +547,93 @@
   </div>
 
  <script>
-    function toggleCheckout() {
-      var formWrapper = document.getElementById('checkout-form-wrapper');
-      formWrapper.classList.toggle('show');
-      if(formWrapper.classList.contains('show')) {
-        setTimeout(function() {
-          formWrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }, 200);
-      }
+  function toggleCheckout() {
+    var formWrapper = document.getElementById('checkout-form-wrapper');
+    formWrapper.classList.toggle('show');
+    if(formWrapper.classList.contains('show')) {
+      setTimeout(function() {
+        formWrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }, 200);
+    }
+  }
+
+  function changeImage(element, src) {
+    document.getElementById('main-img').src = src;
+    var thumbs = document.querySelectorAll('.thumb-item');
+    for (var i = 0; i < thumbs.length; i++) {
+      thumbs[i].classList.remove('active');
+    }
+    element.classList.add('active');
+  }
+
+  function updateQty(amount) {
+    var qtyInput = document.getElementById('quantity');
+    var currentQty = parseInt(qtyInput.value) || 1;
+    currentQty += amount;
+    if (currentQty < 1) { 
+      currentQty = 1; 
+    }
+    qtyInput.value = currentQty;
+  }
+
+  function openTab(evt, tabId) {
+    var tabContents = document.querySelectorAll('.tab-content');
+    for (var i = 0; i < tabContents.length; i++) {
+      tabContents[i].classList.remove('active');
     }
 
-    function changeImage(element, src) {
-      document.getElementById('main-img').src = src;
-      var thumbs = document.querySelectorAll('.thumb-item');
-      for (var i = 0; i < thumbs.length; i++) {
-        thumbs[i].classList.remove('active');
-      }
-      element.classList.add('active');
+    var tabBtns = document.querySelectorAll('.tab-btn');
+    for (var j = 0; j < tabBtns.length; j++) {
+      tabBtns[j].classList.remove('active');
     }
 
-    function updateQty(amount) {
-      var qtyInput = document.getElementById('quantity');
-      var currentQty = parseInt(qtyInput.value) || 1;
-      currentQty += amount;
-      if (currentQty < 1) { 
-        currentQty = 1; 
-      }
-      qtyInput.value = currentQty;
-    }
+    document.getElementById(tabId).classList.add('active');
+    evt.currentTarget.classList.add('active');
+  }
 
-    function openTab(evt, tabId) {
-      var tabContents = document.querySelectorAll('.tab-content');
-      for (var i = 0; i < tabContents.length; i++) {
-        tabContents[i].classList.remove('active');
-      }
+  // Google Sheet Submission Logic
+  var scriptURL = 'https://script.google.com/macros/s/AKfycbyotmpIn7VUkT_j5QXYAUoSR5HmAHerZzK0A1jfWVqmOmYwzLdjdpzCbtpmGgQWwNSZ/exec'; 
+  var form = document.getElementById('checkout-form');
+  var submitBtn = form.querySelector('.btn-submit');
 
-      var tabBtns = document.querySelectorAll('.tab-btn');
-      for (var j = 0; j < tabBtns.length; j++) {
-        tabBtns[j].classList.remove('active');
-      }
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
 
-      document.getElementById(tabId).classList.add('active');
-      evt.currentTarget.classList.add('active');
-    }
+    var formData = {
+      Name: form.Name.value,
+      Phone: form.Phone.value,
+      Address: form.Address.value,
+      Product: form.Product.value,
+      Quantity: form.Quantity.value
+    };
 
-    // Google Sheet Submission Logic
-    var scriptURL = 'https://script.google.com/macros/s/AKfycbyotmpIn7VUkT_j5QXYAUoSR5HmAHerZzK0A1jfWVqmOmYwzLdjdpzCbtpmGgQWwNSZ/exec'; 
-    var form = document.getElementById('checkout-form');
-    var submitBtn = form.querySelector('.btn-submit');
-
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-      var originalBtnText = submitBtn.innerHTML;
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
-
-      var formData = {
-        Name: form.Name.value,
-        Phone: form.Phone.value,
-        Address: form.Address.value,
-        Product: form.Product.value,
-        Quantity: form.Quantity.value
-      };
-
-      fetch(scriptURL, { 
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
-        body: JSON.stringify(formData)
-      })
-      .then(function(response) {
-        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
-        form.reset();
-        document.getElementById('quantity').value = 1;
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-      })
-      .catch(function(error) {
-        console.error('Error!', error);
-        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
-        form.reset();
-        document.getElementById('quantity').value = 1;
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-      });
+    fetch(scriptURL, { 
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {
+        'Content-Type': 'text/plain;charset=utf-8',
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(function() {
+      alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
+      form.reset();
+      document.getElementById('quantity').value = 1;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> অর্ডার নিশ্চিত করুন';
+    })
+    .catch(function(error) {
+      alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
+      form.reset();
+      document.getElementById('quantity').value = 1;
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> অর্ডার নিশ্চিত করুন';
     });
-  </script>
+  });
+</script>
 
 </body>
 </html>
