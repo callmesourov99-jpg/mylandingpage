@@ -546,7 +546,7 @@
 
   </div>
 
-  <script>
+ <script>
     function toggleCheckout() {
       var formWrapper = document.getElementById('checkout-form-wrapper');
       formWrapper.classList.toggle('show');
@@ -591,7 +591,7 @@
       evt.currentTarget.classList.add('active');
     }
 
-    // Updated Google Sheet Script Link & Fetch Logic
+    // Google Sheet Submission Logic
     var scriptURL = 'https://script.google.com/macros/s/AKfycbyotmpIn7VUkT_j5QXYAUoSR5HmAHerZzK0A1jfWVqmOmYwzLdjdpzCbtpmGgQWwNSZ/exec'; 
     var form = document.getElementById('checkout-form');
     var submitBtn = form.querySelector('.btn-submit');
@@ -612,6 +612,7 @@
 
       fetch(scriptURL, { 
         method: 'POST',
+        mode: 'no-cors',
         headers: {
           'Content-Type': 'text/plain;charset=utf-8',
         },
