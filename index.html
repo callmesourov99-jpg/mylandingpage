@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Premium Product Page</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 
   <style>
     /* Global Styles & CSS Variables */
@@ -46,14 +46,12 @@
       box-shadow: var(--shadow);
     }
 
-    /* Layout Structure */
     .product-wrapper {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 40px;
     }
 
-    /* Left Side: Image Gallery */
     .gallery-container {
       display: flex;
       flex-direction: column;
@@ -105,7 +103,6 @@
       border-color: var(--primary-color);
     }
 
-    /* Right Side: Product Details */
     .product-details {
       display: flex;
       flex-direction: column;
@@ -195,7 +192,6 @@
       color: #2ed573;
     }
 
-    /* Order Button */
     .btn-order-now {
       width: 100%;
       background: var(--primary-color);
@@ -219,7 +215,6 @@
       transform: translateY(-2px);
     }
 
-    /* Smooth Slide Dropdown Checkout Form */
     .checkout-form-wrapper {
       max-height: 0;
       overflow: hidden;
@@ -279,7 +274,6 @@
       box-shadow: 0 0 0 3px rgba(255, 71, 87, 0.1);
     }
 
-    /* Quantity Control */
     .quantity-control {
       display: flex;
       align-items: center;
@@ -326,7 +320,6 @@
       background: #26af5f;
     }
 
-    /* Bottom Description Section */
     .product-full-description {
       margin-top: 40px;
       border-top: 1px solid var(--border-color);
@@ -402,7 +395,6 @@
       margin-bottom: 0;
     }
 
-    /* Responsive Breakdown */
     @media (max-width: 768px) {
       .product-wrapper {
         grid-template-columns: 1fr;
@@ -437,25 +429,23 @@
   <div class="container">
     <div class="product-wrapper">
       
-      <!-- Left Column: Product Gallery -->
       <div class="gallery-container">
         <div class="main-image-box">
-          <img id="main-img" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800" alt="Product Image">
+          <img id="main-img" src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800" alt="Product Image"/>
         </div>
         <div class="thumbnail-list">
           <div class="thumb-item active" onclick="changeImage(this, 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800')">
-            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200" alt="Thumb 1">
+            <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=200" alt="Thumb 1"/>
           </div>
           <div class="thumb-item" onclick="changeImage(this, 'https://images.unsplash.com/photo-1484704849700-f032a568e944?w=800')">
-            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=200" alt="Thumb 2">
+            <img src="https://images.unsplash.com/photo-1484704849700-f032a568e944?w=200" alt="Thumb 2"/>
           </div>
           <div class="thumb-item" onclick="changeImage(this, 'https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=800')">
-            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=200" alt="Thumb 3">
+            <img src="https://images.unsplash.com/photo-1546435770-a3e426bf472b?w=200" alt="Thumb 3"/>
           </div>
         </div>
       </div>
 
-      <!-- Right Column: Info & Action -->
       <div class="product-details">
         <span class="badge">In Stock</span>
         <h1 class="product-title">Wireless Noise-Canceling Premium Headphones</h1>
@@ -486,36 +476,29 @@
           <li><i class="fas fa-check-circle"></i> ক্যাশ অন ডেলিভারি সুবিধা</li>
         </ul>
 
-        <!-- Main Trigger Button -->
         <button class="btn-order-now" id="order-btn" onclick="toggleCheckout()">
           <i class="fas fa-shopping-bag"></i> অর্ডার করতে ক্লিক করুন
         </button>
 
-        <!-- Dropdown Form (Reveals Smoothly on Click) -->
         <div class="checkout-form-wrapper" id="checkout-form-wrapper">
           <h3 class="form-title">আপনার ডেলিভারি তথ্য দিন</h3>
           
           <form id="checkout-form">
-            
-            <!-- Name Input -->
             <div class="form-group">
               <label for="name">আপনার নাম *</label>
-              <input type="text" id="name" name="Name" placeholder="উদা: মোঃ রহিম" required>
+              <input type="text" id="name" name="Name" placeholder="উদা: মোঃ রহিম" required="required"/>
             </div>
 
-            <!-- Phone Input -->
             <div class="form-group">
               <label for="phone">ফোন নম্বর *</label>
-              <input type="tel" id="phone" name="Phone" placeholder="017XXXXXXXX" required pattern="[0-9]{11}">
+              <input type="tel" id="phone" name="Phone" placeholder="017XXXXXXXX" required="required" pattern="[0-9]{11}"/>
             </div>
 
-            <!-- Address Input -->
             <div class="form-group">
               <label for="address">সম্পূর্ণ ঠিকানা *</label>
-              <textarea id="address" name="Address" rows="2" placeholder="বাসা নম্বর, রোড, থানা, জেলা..." required></textarea>
+              <textarea id="address" name="Address" rows="2" placeholder="বাসা নম্বর, রোড, থানা, জেলা..." required="required"></textarea>
             </div>
 
-            <!-- Product Selection -->
             <div class="form-group">
               <label for="product">প্রোডাক্ট ভ্যারিয়েন্ট</label>
               <select id="product" name="Product">
@@ -524,17 +507,15 @@
               </select>
             </div>
 
-            <!-- Quantity Counter -->
             <div class="form-group">
               <label>পরিমাণ (Quantity)</label>
               <div class="quantity-control">
                 <button type="button" class="qty-btn" onclick="updateQty(-1)">-</button>
-                <input type="number" id="quantity" name="Quantity" class="qty-input" value="1" readonly>
+                <input type="number" id="quantity" name="Quantity" class="qty-input" value="1" readonly="readonly"/>
                 <button type="button" class="qty-btn" onclick="updateQty(1)">+</button>
               </div>
             </div>
 
-            <!-- Submit Button -->
             <button type="submit" class="btn-submit">
               <i class="fas fa-check-circle"></i> অর্ডার নিশ্চিত করুন
             </button>
@@ -544,25 +525,21 @@
       </div>
     </div>
 
-    <!-- PRODUCT DESCRIPTION SECTION -->
     <div class="product-full-description">
       <div class="tab-header">
         <button class="tab-btn active" onclick="openTab(event, 'tab-desc')">বিবরণ (Description)</button>
         <button class="tab-btn" onclick="openTab(event, 'tab-shipping')">ডেলিভারি ও রিটার্ন</button>
       </div>
 
-      <!-- Tab 1: Description -->
       <div id="tab-desc" class="tab-content active desc-content">
         <h3>প্রোডাক্টের বিস্তারিত তথ্য</h3>
-        <p>আমাদের এই প্রিমিয়াম হেডফোনটি বিশেষভাবে ডিজাইন করা হয়েছে যেন আপনি পান ক্রিস্টাল ক্লিয়ার সাউন্ড এবং ডিপ বেস। লং জার্নি কিংবা ডেইলি কাজের মধ্যে শান্তিতে গান শোনার জন্য এর Active Noise Cancellation প্রযুক্তি আপনাকে বাইরের সব কোলাহল থেকে মুক্ত রাখবে।</p>
-        <p>এর সফট ইয়ার প্যাড টানা কয়েক ঘণ্টা ব্যবহারের পরেও কানে কোনো অস্বস্তি তৈরি করে না। তাছাড়াও দ্রুত চার্জিং প্রযুক্তির কারণে মাত্র ১০ মিনিটের চার্জে ২ ঘণ্টার বেশি ব্যাকআপ পাওয়া যাবে।</p>
+        <p>আমাদের এই প্রিমিয়াম হেডফোনটি বিশেষভাবে ডিজাইন করা হয়েছে যেন আপনি পান ক্রিস্টাল ক্লিয়ার সাউন্ড এবং ডিপ বেস।</p>
       </div>
 
-      <!-- Tab 2: Shipping Details -->
       <div id="tab-shipping" class="tab-content desc-content">
         <div class="shipping-box">
           <h4><i class="fas fa-truck"></i> দ্রুত ডেলিভারি পলিসি</h4>
-          <p>ঢাকার ভেতরে ২৪ থেকে ৪৮ ঘণ্টার মধ্যে ডেলিভারি করা হয়। ঢাকার বাহিরে ৩ থেকে ৫ দিনের মধ্যে পেমেন্ট নেওয়ার পর বা ক্যাশ অন ডেলিভারিতে প্রোডাক্ট পৌঁছে দেওয়া হয়।</p>
+          <p>ঢাকার ভেতরে ২৪ থেকে ৪৮ ঘণ্টার মধ্যে ডেলিভারি করা হয়।</p>
         </div>
       </div>
     </div>
@@ -570,79 +547,80 @@
   </div>
 
   <script>
-    // Smooth Toggle for Checkout Form
     function toggleCheckout() {
-      const formWrapper = document.getElementById('checkout-form-wrapper');
-      
-      // Toggle class for smooth animation
+      var formWrapper = document.getElementById('checkout-form-wrapper');
       formWrapper.classList.toggle('show');
-
-      // Auto scroll to form on mobile view
       if(formWrapper.classList.contains('show')) {
-        setTimeout(() => {
+        setTimeout(function() {
           formWrapper.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 200);
       }
     }
 
-    // Thumbnail Switcher
     function changeImage(element, src) {
       document.getElementById('main-img').src = src;
-      let thumbs = document.querySelectorAll('.thumb-item');
-      thumbs.forEach(thumb => thumb.classList.remove('active'));
+      var thumbs = document.querySelectorAll('.thumb-item');
+      for (var i = 0; i < thumbs.length; i++) {
+        thumbs[i].classList.remove('active');
+      }
       element.classList.add('active');
     }
 
-    // Quantity Increment/Decrement
     function updateQty(amount) {
-      const qtyInput = document.getElementById('quantity');
-      let currentQty = parseInt(qtyInput.value);
+      var qtyInput = document.getElementById('quantity');
+      var currentQty = parseInt(qtyInput.value) || 1;
       currentQty += amount;
-      if (currentQty < 1) currentQty = 1;
+      if (currentQty < 1) { 
+        currentQty = 1; 
+      }
       qtyInput.value = currentQty;
     }
 
-    // Bottom Description Tab Switcher
     function openTab(evt, tabId) {
-      const tabContents = document.querySelectorAll('.tab-content');
-      tabContents.forEach(content => content.classList.remove('active'));
+      var tabContents = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < tabContents.length; i++) {
+        tabContents[i].classList.remove('active');
+      }
 
-      const tabBtns = document.querySelectorAll('.tab-btn');
-      tabBtns.forEach(btn => btn.classList.remove('active'));
+      var tabBtns = document.querySelectorAll('.tab-btn');
+      for (var j = 0; j < tabBtns.length; j++) {
+        tabBtns[j].classList.remove('active');
+      }
 
       document.getElementById(tabId).classList.add('active');
       evt.currentTarget.classList.add('active');
     }
 
-    // Google Sheet Integration
-const scriptURL = 'https://script.google.com/macros/s/AKfycbyMev-W9Q3xBPfQsUM_usHCLTdBWBxcQ-XjZW-a-7wCpQU7PCKB2ot1D9LK9ypxqjaa/exec` '; //
-const form = document.getElementById('checkout-form');
-const submitBtn = form.querySelector('.btn-submit');
+    // Fixed Google Sheet Submission for GitHub Pages
+    var scriptURL = 'https://script.google.com/macros/s/AKfycbyMev-W9Q3xBPfQsUM_usHCLTdBWBxcQ-XjZW-a-7wCpQU7PCKB2ot1D9LK9ypxqjaa/exec';
+    var form = document.getElementById('checkout-form');
+    var submitBtn = form.querySelector('.btn-submit');
 
-form.addEventListener('submit', function(e) {
-  e.preventDefault();
-  
-  // Change button state during submission
-  const originalBtnText = submitBtn.innerHTML;
-  submitBtn.disabled = true;
-  submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+      var originalBtnText = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
 
-  // Send Data to Google Sheet
-  fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-    .then(response => {
-      alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
-      form.reset(); // Reset form fields
-      document.getElementById('quantity').value = 1; // Reset quantity
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
-    })
-    .catch(error => {
-      console.error('Error!', error.message);
-      alert('দুঃখিত! কোনো একটি সমস্যা হয়েছে, আবার চেষ্টা করুন।');
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = originalBtnText;
+      fetch(scriptURL, { 
+        method: 'POST', 
+        body: new FormData(form),
+        mode: 'no-cors' // GitHub Pages CORS error fix
+      })
+      .then(function(response) {
+        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
+        form.reset();
+        document.getElementById('quantity').value = 1;
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      })
+      .catch(function(error) {
+        console.error('Error!', error.message);
+        alert('দুঃখিত! কোনো একটি সমস্যা হয়েছে, আবার চেষ্টা করুন।');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      });
     });
-});
   </script>
 
 </body>
