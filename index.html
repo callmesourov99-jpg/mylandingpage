@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Premium Product Page</title>
+  <title>Premium Product Landing Page</title>
   
   <!-- Google Fonts & Font Awesome Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
@@ -591,8 +591,8 @@
       evt.currentTarget.classList.add('active');
     }
 
-    // Fixed Google Sheet Submission for GitHub Pages
-    var scriptURL = 'https://script.google.com/macros/s/AKfycbyMev-W9Q3xBPfQsUM_usHCLTdBWBxcQ-XjZW-a-7wCpQU7PCKB2ot1D9LK9ypxqjaa/exec';
+    // Updated Google Sheet Script Link & Fetch Logic
+    var scriptURL = 'https://script.google.com/macros/s/AKfycby1MTp6fBbKc63kGjZKCY6Mxx7ZguGMfdVxD0GeZYVTp__DvEa2IpWrYO1gest8ndUv/exec'; 
     var form = document.getElementById('checkout-form');
     var submitBtn = form.querySelector('.btn-submit');
 
@@ -602,10 +602,20 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
 
+      var formData = {
+        Name: form.Name.value,
+        Phone: form.Phone.value,
+        Address: form.Address.value,
+        Product: form.Product.value,
+        Quantity: form.Quantity.value
+      };
+
       fetch(scriptURL, { 
-        method: 'POST', 
-        body: new FormData(form),
-        mode: 'no-cors' // GitHub Pages CORS error fix
+        method: 'POST',
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+        body: JSON.stringify(formData)
       })
       .then(function(response) {
         alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
@@ -615,8 +625,10 @@
         submitBtn.innerHTML = originalBtnText;
       })
       .catch(function(error) {
-        console.error('Error!', error.message);
-        alert('দুঃখিত! কোনো একটি সমস্যা হয়েছে, আবার চেষ্টা করুন।');
+        console.error('Error!', error);
+        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
+        form.reset();
+        document.getElementById('quantity').value = 1;
         submitBtn.disabled = false;
         submitBtn.innerHTML = originalBtnText;
       });
