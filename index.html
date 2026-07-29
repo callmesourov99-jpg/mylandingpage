@@ -499,11 +499,12 @@
               <textarea id="address" name="Address" rows="2" placeholder="বাসা নম্বর, রোড, থানা, জেলা..." required="required"></textarea>
             </div>
 
+            <!-- কালার অপশনে Matte Black যোগ করা হয়েছে -->
             <div class="form-group">
               <label for="product">কালার/ভ্যারিয়েন্ট নির্বাচন করুন</label>
               <select id="product" name="Product">
-                <option value="Black Color">Black Color</option>
-                <option value="Silver/Grey Color">Silver/Grey Color</option>
+                <option value="Matte Black">Matte Black</option>
+                <option value="Silver Grey">Silver Grey</option>
               </select>
             </div>
 
@@ -599,25 +600,25 @@
       evt.currentTarget.classList.add('active');
     }
 
-    // Google Sheet Submission Logic
+    // Google Sheet Submission Logic (Instant Response Optimized)
     var scriptURL = 'https://script.google.com/macros/s/AKfycbyotmpIn7VUkT_j5QXYAUoSR5HmAHerZzK0A1jfWVqmOmYwzLdjdpzCbtpmGgQWwNSZ/exec'; 
     var form = document.getElementById('checkout-form');
     var submitBtn = form.querySelector('.btn-submit');
 
-    // প্রোডাক্টের একক দাম (ইংরেজি সংখ্যায় লিখতে হবে)
     var unitPrice = 999; 
 
     form.addEventListener('submit', function(e) {
       e.preventDefault();
       
       var originalBtnText = submitBtn.innerHTML;
+      
+      // বোতাম সাথে সাথে প্রসেসিং দেখাবে
       submitBtn.disabled = true;
       submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> প্রসেসিং হচ্ছে...';
 
       var qty = parseInt(form.Quantity.value) || 1;
       var totalPrice = (unitPrice * qty) + " BDT"; 
 
-      // সঠিক প্রোডাক্ট নাম
       var fullProductName = "Mini Massage Gun SL-720 - " + form.Product.value;
 
       var formData = {
@@ -629,6 +630,7 @@
         Quantity: qty
       };
 
+      // ব্যাকগ্রাউন্ডে ডেটা পাঠানো
       fetch(scriptURL, { 
         method: 'POST',
         mode: 'no-cors',
@@ -636,21 +638,16 @@
           'Content-Type': 'text/plain;charset=utf-8',
         },
         body: JSON.stringify(formData)
-      })
-      .then(function() {
-        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
-        form.reset();
-        document.getElementById('quantity').value = 1;
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
-      })
-      .catch(function(error) {
-        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
-        form.reset();
-        document.getElementById('quantity').value = 1;
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalBtnText;
       });
+
+      // গ্রাহককে সাথে সাথে ১ সেকেন্ডের কম সময়ে কনফার্মেশন মেসেজ দেখানো
+      setTimeout(function() {
+        alert('ধন্যবাদ! আপনার অর্ডারটি সফলভাবে গৃহীত হয়েছে।');
+        form.reset();
+        document.getElementById('quantity').value = 1;
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+      }, 300);
     });
   </script>
 
